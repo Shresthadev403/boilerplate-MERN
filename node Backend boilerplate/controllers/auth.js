@@ -17,7 +17,6 @@ exports.signIn = (req, res) => {
   const { email, password } = req.body;
   // find the user based on model
   User.findOne({ email: email }).then((user) => {
-   
     if (!user.authenticatePassword(password)) {
       return res
         .status(401)
@@ -34,6 +33,11 @@ exports.signIn = (req, res) => {
       return res.status(200).json({ token, user: { _id, name, email, role } });
     }
   });
+};
+
+exports.signOut = (req, res) => {
+  res.clearCookie("t");
+  return res.status(200).json({ msg: "Signed Out sucessfully" });
 };
 
 exports.requireSignIn = expressJwt({
