@@ -56,3 +56,35 @@ exports.signInValidator = [
     next();
   },
 ];
+
+exports.forgetPasswordValidator = [
+  check("email").isEmail(),
+  (req, res, next) => {
+    const errors = validationResult(req).array();
+    if (errors.length) {
+      return res.status(422).json({ errors });
+    }
+
+    next();
+  },
+];
+
+exports.passwordResetValidator = [
+  check("newpassword")
+    .not()
+    .isEmpty()
+    .isLength({ min: 8, max: 32 })
+    .withMessage("password must be 8 character long")
+    .matches("[1 - 9]")
+    .withMessage("password must have atleast one numeric character")
+    .matches("[A - Z]")
+    .withMessage("password must have atleast one upper case letter"),
+  (req, res, next) => {
+    const errors = validationResult(req).array();
+    if (errors.length) {
+      return res.status(422).json({ errors });
+    }
+
+    next();
+  },
+];
