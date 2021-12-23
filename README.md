@@ -1,5 +1,11 @@
 # boilerplate-MERN
 a simple boiler plate which includes authentication and user controls
+
+
+
+
+
+
 Endpoints for backend: 
     "/api": "Show endpoints",
     "/signup": "create new user in database",
