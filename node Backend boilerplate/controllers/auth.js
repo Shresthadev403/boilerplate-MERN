@@ -61,7 +61,7 @@ exports.signIn = (req, res) => {
         .json({ error: "email and password doesnot match,Try Again" });
     } else {
       // generate token with user id and secret key in env file
-      const token = jwt.sign({ _id: User._id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ _id: user._id ,role:user.role}, process.env.JWT_SECRET);
 
       // persist cookie as t with expiry date 1 month
       res.cookie("t", token, { expire: new Date() + 2.628e6 });
@@ -84,6 +84,23 @@ exports.requireSignIn = expressJwt({
   algorithms: ["HS256"],
   userProperty: "auth",
 });
+
+// allows to modify data by subscriber or admin
+exports.hasAuthorization=(req,res,next)=>{
+  const isSubscriber=req.profile&& req.auth&&req.profile._id==req.auth._id;
+  const isAdmin=req.profile&& req.auth&&req.profile.role==='admin';
+   isAuthorized=isSubscriber||isAdmin;
+ //  console.log(isSubscriber);
+//   console.log(isAdmin);
+ //  console.log("req.auth",req.auth);
+ //  console.log("req.profile",req.profile);
+   if(!isAuthorized)
+   {
+     return res.status(403).json({error:"User is not authorized to perform this action"});
+   }
+   next();
+  };
+
 
 exports.forgetPassword = (req, res) => {
   const { email } = req.body;

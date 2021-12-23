@@ -1,6 +1,7 @@
 const {Router}=require('express');
-const { requireSignIn, forgetPassword, resetPassword } = require('../controllers/auth');
-const { userById, getUser, userUpdate, deleteUser } = require('../controllers/user');
+const { isAdmin } = require('../controllers/admin');
+const { requireSignIn, forgetPassword, resetPassword, hasAuthorization } = require('../controllers/auth');
+const { userById, getUser, userUpdate, deleteUser, getAllUsers } = require('../controllers/user');
 const { passwordResetValidator, forgetPasswordValidator } = require('../validator/validator');
 
 
@@ -12,7 +13,8 @@ router.param('userId', userById);
 
 // user routes
 router.get('/user/:userId',requireSignIn,getUser);
-router.put('/user/update/:userId',requireSignIn,userUpdate);
+router.get('/users',requireSignIn,isAdmin,getAllUsers);
+router.put('/user/update/:userId',requireSignIn,hasAuthorization,userUpdate);
 router.put('/forgetpassword',forgetPasswordValidator,forgetPassword);
 router.put('/resetpassword',passwordResetValidator,resetPassword);
 router.delete('/user/delete/:userId',requireSignIn,deleteUser);

@@ -6,6 +6,7 @@ const morgan=require('morgan');
 // importing routes
 const authRoutes=require('./routes/auth');
 const userRoutes=require('./routes/user');
+const docsRoutes=require('./routes/docs');
 
 
 let app=express();
@@ -29,6 +30,7 @@ app.use(express.json());
 //for routes
 app.use('/',authRoutes);
 app.use('/',userRoutes);
+app.use('/',docsRoutes);
 
 // listening on port
 const port = process.env.PORT ;

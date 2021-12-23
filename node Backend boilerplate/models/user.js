@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
-    default: "suscriber",
+    default: "subscriber",
   },
   created: {
     type: Date,
@@ -34,9 +34,9 @@ const userSchema = new mongoose.Schema({
     type: Date,
   },
   resetPasswordLink: {
-    type: String,
-    default: ""
-}
+    Type: String,
+    default: "",
+  },
 });
 
 userSchema

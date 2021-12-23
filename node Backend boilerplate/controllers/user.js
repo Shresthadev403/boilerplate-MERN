@@ -18,6 +18,15 @@ exports.userById = (req, res, next, id) => {
 exports.getUser = (req, res) => {
   res.status(200).json(req.profile);
 };
+exports.getAllUsers=(req,res)=>{
+  User.find((err, user) => {
+    if (err) {
+      return res.status(400).json({ error: err });
+    }
+
+    res.status(200).json({ users: user });
+  }).select("name email role created");
+};
 
 exports.userUpdate = (req, res) => {
   let form = new formidable.IncomingForm();
