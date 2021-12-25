@@ -2,6 +2,7 @@ const express=require('express');
 const dotenv=require('dotenv');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
+const cors=require('cors');
 
 // importing routes
 const authRoutes=require('./routes/auth');
@@ -26,6 +27,7 @@ mongoose.connection.on("open",  ()=> {
 //using middlewares
 app.use(morgan('dev'));  // used for coloured status code token for development use
 app.use(express.json()); 
+app.use(cors());
 
 //for routes
 app.use('/',authRoutes);

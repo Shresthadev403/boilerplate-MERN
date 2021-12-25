@@ -7,7 +7,7 @@ router=Router();
 
 router.post('/signup',signUpValidator,signUp);
 router.post('/sociallogin',socialLogin);
-router.get('/signin',signInValidator,signIn);
+router.post('/signin',signInValidator,signIn);
 router.get('/signout',requireSignIn,signOut)
 
 module.exports=router;
