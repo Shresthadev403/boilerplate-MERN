@@ -57,7 +57,7 @@ exports.signInValidator = [
   },
 ];
 
-exports.forgetPasswordValidator = [
+exports.emailValidator = [
   check("email").isEmail(),
   (req, res, next) => {
     const errors = validationResult(req).array();
@@ -69,7 +69,7 @@ exports.forgetPasswordValidator = [
   },
 ];
 
-exports.passwordResetValidator = [
+exports.passwordValidator = [
   check("newpassword")
     .not()
     .isEmpty()

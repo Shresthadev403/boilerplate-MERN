@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
+import { isAdmin } from "../auth/admin";
 import { getJwt } from "../auth/auth";
 import { logOut } from "../user/signOut";
-
-
 
 const IsActive = (path) => {
   const location = useLocation();
@@ -14,7 +12,6 @@ const IsActive = (path) => {
     return false;
   }
 };
-
 
 function Navbar() {
   return (
@@ -35,6 +32,20 @@ function Navbar() {
                 Home
               </Link>
             </li>
+            <>
+              {isAdmin() && (
+                <li>
+                  <Link
+                    className={
+                      IsActive("/users") ? "nav-link-active" : "nav-items "
+                    }
+                    to="/users"
+                  >
+                    Users
+                  </Link>
+                </li>
+              )}
+            </>
             {!getJwt() && (
               <li>
                 <Link
@@ -65,21 +76,35 @@ function Navbar() {
                   }
                   to="/"
                   onClick={logOut}
-                  
                 >
                   Sign Out
                 </Link>
               )}
             </li>
             <li>
-              <Link
-                className={
-                  IsActive("/about") ? "nav-link-active" : "nav-items "
-                }
-                to="/about"
-              >
-                About
-              </Link>
+              {!getJwt() && (
+                <Link
+                  className={
+                    IsActive("/about") ? "nav-link-active" : "nav-items "
+                  }
+                  to="/about"
+                >
+                  About
+                </Link>
+              )}
+              {getJwt() && (
+                <Link
+                  className={
+                    IsActive(`/profile/${getJwt().user._id}`) ? "nav-link-active" : "nav-items "
+                  }
+                  to={`/profile/${getJwt().user._id}`}
+                >
+                  {getJwt() ?`${isAdmin()?"@":""} ${ getJwt().user.name}` : ""}{" "}
+                  <p style={{ fontSize: "10px" }}>
+                    
+                  </p>
+                </Link>
+              )}
             </li>
           </div>
         </ul>

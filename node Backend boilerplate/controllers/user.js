@@ -31,21 +31,23 @@ exports.getAllUsers=(req,res)=>{
 exports.userUpdate = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
-  // console.log(form);
-  form.parse(req, (err, fields, files) => {
+  //console.log(form);
+  console.log(req.body);
+  form.parse(req, (err, fields) => {
     // console.log("creating new post");
+   // console.log(req.body);
     if (err) {
       return res.status(400).json({ error: err });
     }
     let user = req.profile;
     user = _.extend(user, fields);
-    //   console.log(user);
+      console.log(user);
     user.updated = Date.now();
     user.save((err, result) => {
       if (err) {
         return res.status(400).json({ error: err });
       }
-      res.status(200).json(result);
+     return res.status(200).json(result);
     });
   });
 };
@@ -56,6 +58,6 @@ exports.deleteUser = (req, res) => {
     if (err) {
       return res.status(400).json({ error: err });
     }
- res.status(200).json({ msg: "user deleted sucessfully" });
+ res.status(200).json({msg: "user deleted sucessfully" });
   });
 };

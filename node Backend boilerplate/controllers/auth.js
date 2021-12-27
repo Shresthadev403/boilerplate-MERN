@@ -88,12 +88,12 @@ exports.requireSignIn = expressJwt({
 // allows to modify data by subscriber or admin
 exports.hasAuthorization=(req,res,next)=>{
   const isSubscriber=req.profile&& req.auth&&req.profile._id==req.auth._id;
-  const isAdmin=req.profile&& req.auth&&req.profile.role==='admin';
+  const isAdmin=req.profile&& req.auth&&req.auth.role=='admin';
    isAuthorized=isSubscriber||isAdmin;
- //  console.log(isSubscriber);
-//   console.log(isAdmin);
- //  console.log("req.auth",req.auth);
- //  console.log("req.profile",req.profile);
+   console.log(isSubscriber);
+  console.log(isAdmin);
+  console.log("req.auth",req.auth);
+   console.log("req.profile",req.profile);
    if(!isAuthorized)
    {
      return res.status(403).json({error:"User is not authorized to perform this action"});
@@ -104,12 +104,13 @@ exports.hasAuthorization=(req,res,next)=>{
 
 exports.forgetPassword = (req, res) => {
   const { email } = req.body;
+  console.log(req.body);
   User.findOne({ email: email }).then((user) => {
     //  console.log(user);
     if (!user) {
       return res
         .status(401)
-        .json({ msg: "user with this email doesnot exist" });
+        .json({error:{ msg: "user with this email doesnot exist" }});
     }
     // generate token with userid and secret key
     const token = jwt.sign(
@@ -122,8 +123,8 @@ exports.forgetPassword = (req, res) => {
       from: "noreply@node-react.com",
       to: email,
       subject: "Password Reset Instructions",
-      text: `Please use the following link to reset your password: ${process.env.CLIENT_URL}/reset-password/${token}`,
-      html: `<p>Please use the following link to reset your password:</p> <p>${process.env.CLIENT_URL}/reset-password/${token}</p>`,
+      text: `Please use the following link to reset your password: ${process.env.CLIENT_URL}/resetpassword/${token}`,
+      html: `<p>Please use the following link to reset your password:</p> <p>${process.env.CLIENT_URL}/resetpassword/${token}</p>`,
     };
 
     user = _.extend(user, { resetPasswordLink: token });
@@ -136,7 +137,7 @@ exports.forgetPassword = (req, res) => {
         sendEmail(emaildata);
       }
       return res.status(200).json({
-        message: `Email has been sent to ${email}. Follow the instructions to reset your password.(Check your spam folder in case you cannot find our mail`,
+        msg: `Email has been sent to ${email}. Follow the instructions to reset your password.(Check your spam folder in case you cannot find our mail`,
       });
     });
   });
@@ -144,6 +145,7 @@ exports.forgetPassword = (req, res) => {
 
 exports.resetPassword = (req, res) => {
   const { resetPasswordLink, newpassword } = req.body;
+  //console.log(req.body);
 
   User.findOne({ resetPasswordLink }, (err, user) => {
     // if err or no user
@@ -167,7 +169,7 @@ exports.resetPassword = (req, res) => {
         });
       }
       res.json({
-        message: `Great! Now you can login with your new password.`,
+        msg: `Great! Now you can login with your new password.`,
       });
     });
   });

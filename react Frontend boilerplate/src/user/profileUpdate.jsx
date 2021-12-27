@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
-import { Navigate, Link } from "react-router-dom";
-import { setJwt, signIn } from "../auth/auth";
-import { errNotification, infoNotification } from "../core/toast";
+import { getJwt, signUp, updatejwt } from "../auth/auth";
+import { updateUser } from "../auth/user";
+import { infoNotification, errNotification } from "../core/toast";
+import { useParams,useNavigate } from "react-router-dom";
 
-function SignIn() {
+function UpdateProfile() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [info, setInfo] = useState(null);
-  const [redirectToHome, setRedirectToHome] = useState(false);
+
+  const { userId } = useParams();
+  const navigate=useNavigate();
   // handle changes on input field
   const handleInputChange = (data) => (event) => {
+    if (data === "name") setName(event.target.value);
     if (data === "email") setEmail(event.target.value);
     if (data === "password") setPassword(event.target.value);
     setError(null);
@@ -19,32 +24,37 @@ function SignIn() {
   };
 
   const onSubmitButton = (event) => {
-    const user = {
+    const newData = {
+      name,
       email,
       password,
     };
-    // console.log(event.target);
-    //  console.log(user);
-    //  console.log("submit");
-    signIn(user).then((data) => {
-      console.log("signin data:", data);
+    updateUser(newData, userId).then((data) => {
+      console.log("data:", data);
       if (data.errors) {
         setError(data.errors[0].msg);
-      } else if (data.error) {
-        setError(data.error);
       } else {
+        // jwt
+      //  updatejwt(data.data);
+      if(data.data._id===getJwt().user._id){
+        updatejwt(data.data);
+        navigate(`../profile/${userId}`);
+      }
+
+  
         // crear state after submitting form
-        // setEmail("");
-        // setPassword("");
-        console.log("sucessful signin");
-        // setError(null);
-        setInfo("Sign in Sucessful");
-        setJwt(data.data, () => {
-          setRedirectToHome(true);
-        });
+        setName("");
+        setEmail("");
+        setPassword("");
+        console.log("user update sucessful");
+        setError(null);
+        setInfo("Details updated sucessfully");
+        navigate(`/user/profile/${userId}`);
+      
       }
     });
   };
+
   useEffect(() => {
     if (error) {
       errNotification(error);
@@ -54,13 +64,20 @@ function SignIn() {
     }
   }, [error, info]);
 
-  if (redirectToHome) {
-    return <Navigate to="/" />;
-  }
-
   return (
     <>
       <div className="form-control">
+        <div>
+          <label htmlFor="nameInput">Name</label>
+          <br />
+          <input
+            type="text"
+            name="name"
+            id="nameInput"
+            onChange={handleInputChange("name")}
+            value={name}
+          />
+        </div>
         <div>
           <label htmlFor="emailInput">Email</label>
           <br />
@@ -89,18 +106,12 @@ function SignIn() {
             className="button-submit"
             onClick={onSubmitButton}
           >
-            <b>SignIn</b>
+            <b>Update</b>
           </button>
-        </div>
-
-        <div>
-          <Link to="/forgetpassword" >
-            <b>forget passowrd?</b>
-          </Link>
         </div>
       </div>
     </>
   );
 }
 
-export default SignIn;
+export default UpdateProfile;

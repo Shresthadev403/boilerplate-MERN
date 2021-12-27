@@ -1,49 +1,52 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
-import { Navigate, Link } from "react-router-dom";
-import { setJwt, signIn } from "../auth/auth";
-import { errNotification, infoNotification } from "../core/toast";
+import { Navigate } from "react-router-dom";
+import {  setJwt, signIn } from "../auth/auth";
+import { errNotification,infoNotification } from "../core/toast";
+import { forgetPassword } from "../auth/user";
 
-function SignIn() {
+function ForgetPassword() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [info, setInfo] = useState(null);
-  const [redirectToHome, setRedirectToHome] = useState(false);
+ // const[redirectToHome,setRedirectToHome]=useState(false);
   // handle changes on input field
   const handleInputChange = (data) => (event) => {
     if (data === "email") setEmail(event.target.value);
-    if (data === "password") setPassword(event.target.value);
     setError(null);
     setInfo(null);
   };
 
   const onSubmitButton = (event) => {
     const user = {
-      email,
-      password,
+      email
     };
+    console.log(user);
     // console.log(event.target);
     //  console.log(user);
     //  console.log("submit");
-    signIn(user).then((data) => {
-      console.log("signin data:", data);
-      if (data.errors) {
-        setError(data.errors[0].msg);
-      } else if (data.error) {
-        setError(data.error);
-      } else {
+    forgetPassword(user).then((data) => {
+      console.log("forget data:", data);
+      if (data.data.errors) {
+        setError("User with this email doesnot exist.Please Enter valid email");
+      } else if(data.data.error){
+        setError(data.data.error.msg);
+      }
+      else {
         // crear state after submitting form
         // setEmail("");
         // setPassword("");
-        console.log("sucessful signin");
-        // setError(null);
-        setInfo("Sign in Sucessful");
-        setJwt(data.data, () => {
-          setRedirectToHome(true);
-        });
+        console.log("Reset link sent to email");
+       setError(null);
+        setInfo(data.data.msg);
+        // setJwt(data.data,()=>{
+        //   setRedirectToHome(true);
+        // });
+        
       }
     });
+
+    
   };
   useEffect(() => {
     if (error) {
@@ -54,9 +57,11 @@ function SignIn() {
     }
   }, [error, info]);
 
-  if (redirectToHome) {
-    return <Navigate to="/" />;
-  }
+//   if(redirectToHome)
+//   {
+    
+//     return <Navigate to="/"/>
+//   }
 
   return (
     <>
@@ -72,35 +77,25 @@ function SignIn() {
             value={email}
           />
         </div>
-        <div>
-          <label htmlFor="passwordInput">Password</label>
-          <br />
-          <input
-            type="password"
-            name="name"
-            id="passwordInput"
-            onChange={handleInputChange("password")}
-            value={password}
-          />
-        </div>
+        
         <div>
           <button
             type="submit"
             className="button-submit"
             onClick={onSubmitButton}
           >
-            <b>SignIn</b>
+            <b>Send Reset link your email</b>
           </button>
-        </div>
-
-        <div>
-          <Link to="/forgetpassword" >
-            <b>forget passowrd?</b>
-          </Link>
+          <div>
+            {
+              info&&(<p>Reset link has been sent to your email 
+              (Please follow the instruction there)</p>)
+            }
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default SignIn;
+export default ForgetPassword;

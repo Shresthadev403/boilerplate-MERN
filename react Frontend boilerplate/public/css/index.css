@@ -8,11 +8,11 @@ body nav {
   font-family: cursive;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
-li{
-    list-style: none;
+li {
+  list-style: none;
 }
 
 /* navbar styling */
@@ -25,7 +25,7 @@ li{
   color: #fff;
 }
 
-.form-control{
+.form-control {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,10 +35,11 @@ li{
   margin-left: 5rem;
   margin-right: 5rem;
   font-size: 2vw;
- 
 }
 
-input[type=text], input[type=password],select{
+input[type="text"],
+input[type="password"],
+select {
   width: 90vw;
   height: 5vw;
   padding: 12px 20px;
@@ -50,39 +51,57 @@ input[type=text], input[type=password],select{
 }
 
 
+  .button-submit {
+    width: 15vw;
+    background-color: #4caf50;
+    color: rgb(10, 10, 10);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 2vw;
+  
+}
 
-.button-submit:hover{
+@media (min-width: 900px) {
+  .button-submit {
+    width: 12vw;
+    background-color: #4caf50;
+    color: rgb(10, 10, 10);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.5vw;
+  }
+}
+.button-submit:hover {
   background: red;
 }
 
-
-button[type="submit"],select{
+button[type="submit"],
+select {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: rgb(10, 10, 10);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-
 }
-
-
 
 .nav-link {
-    text-decoration: none;
-  }
+  text-decoration: none;
+}
 
- 
-.nav-items{
-    color: blanchedalmond;
+.nav-items {
+  color: blanchedalmond;
 }
 .nav-link-active {
-    text-decoration: none;
-    color: rgb(189, 28, 103);
-  }
-
+  text-decoration: none;
+  color: rgb(189, 28, 103);
+}
 
 .logo {
   font-size: 32px;
@@ -94,17 +113,16 @@ button[type="submit"],select{
   font-size: 18px;
 }
 
-.menu li{
-   color: bisque; 
+.menu li {
+  color: bisque;
   padding: 5px 14px;
 }
 
 .menu li:hover {
-    display: inline-block;
-    background-color: #4d5757;
-    transition: 0.3s ease;
-  }
-
+  display: inline-block;
+  background-color: #4d5757;
+  transition: 0.3s ease;
+}
 
 /* CHECKBOX HACK */
 input[type="checkbox"] {

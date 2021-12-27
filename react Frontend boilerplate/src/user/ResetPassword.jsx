@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
-import { Navigate, Link } from "react-router-dom";
+import { useParams ,Link} from "react-router-dom";
 import { setJwt, signIn } from "../auth/auth";
-import { errNotification, infoNotification } from "../core/toast";
+import { errNotification,infoNotification } from "../core/toast";
+import { resetPassword } from "../auth/user";
 
-function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function ResetPassword() {
+  const [newpassword, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [info, setInfo] = useState(null);
-  const [redirectToHome, setRedirectToHome] = useState(false);
+  const[redirectToHome,setRedirectToHome]=useState(false);
+  const{resetToken}=useParams();
   // handle changes on input field
   const handleInputChange = (data) => (event) => {
-    if (data === "email") setEmail(event.target.value);
     if (data === "password") setPassword(event.target.value);
     setError(null);
     setInfo(null);
@@ -20,30 +20,34 @@ function SignIn() {
 
   const onSubmitButton = (event) => {
     const user = {
-      email,
-      password,
+      "resetPasswordLink":resetToken,
+      newpassword
     };
     // console.log(event.target);
     //  console.log(user);
     //  console.log("submit");
-    signIn(user).then((data) => {
-      console.log("signin data:", data);
+    resetPassword(user).then((data) => {
+      console.log("reset data:", data);
       if (data.errors) {
-        setError(data.errors[0].msg);
-      } else if (data.error) {
-        setError(data.error);
-      } else {
+        setError(data.data.errors[0].msg);
+      } else if(data.data.error){
+        setError(data.data.error);
+      }
+      else {
         // crear state after submitting form
         // setEmail("");
         // setPassword("");
-        console.log("sucessful signin");
-        // setError(null);
-        setInfo("Sign in Sucessful");
-        setJwt(data.data, () => {
-          setRedirectToHome(true);
-        });
+        console.log("new password set sucessful");
+        setError(null);
+        setInfo(data.data.msg);
+        // setJwt(data.data,()=>{
+        //   setRedirectToHome(true);
+        // });
+        
       }
     });
+
+    
   };
   useEffect(() => {
     if (error) {
@@ -54,33 +58,24 @@ function SignIn() {
     }
   }, [error, info]);
 
-  if (redirectToHome) {
-    return <Navigate to="/" />;
-  }
+//   if(redirectToHome)
+//   {
+    
+//     return <Navigate to="/"/>
+//   }
 
   return (
     <>
       <div className="form-control">
         <div>
-          <label htmlFor="emailInput">Email</label>
-          <br />
-          <input
-            type="text"
-            name="name"
-            id="emailInput"
-            onChange={handleInputChange("email")}
-            value={email}
-          />
-        </div>
-        <div>
-          <label htmlFor="passwordInput">Password</label>
+          <label htmlFor="passwordInput">New Password</label>
           <br />
           <input
             type="password"
             name="name"
             id="passwordInput"
             onChange={handleInputChange("password")}
-            value={password}
+            value={newpassword}
           />
         </div>
         <div>
@@ -89,18 +84,22 @@ function SignIn() {
             className="button-submit"
             onClick={onSubmitButton}
           >
-            <b>SignIn</b>
+            <b>Update</b>
           </button>
-        </div>
+          <div>
+            {
+              info&&(<><p>You can sign in with your new password
 
-        <div>
-          <Link to="/forgetpassword" >
-            <b>forget passowrd?</b>
-          </Link>
+              </p>
+              <Link to="/signin">Sign In</Link>
+              </>)
+            }
+          </div>
         </div>
+       
       </div>
     </>
   );
 }
 
-export default SignIn;
+export default ResetPassword;

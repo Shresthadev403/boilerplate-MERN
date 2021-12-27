@@ -1,6 +1,7 @@
 exports.isAdmin = (req, res, next) => {
-  const isAdmin = req.auth && req.auth.role === "admin";
-  //console.log(req.auth);
+  const isAdmin = req.auth && req.auth.role == "admin";
+  
+  console.log(req.auth);
   if (!isAdmin) {
     return res
       .status(403)
