@@ -28,7 +28,7 @@ function SignUp() {
     //  console.log(user);
     //  console.log("submit");
     signUp(user).then((data) => {
-      console.log("data:", data);
+     // console.log("data:", data);
       if (data.errors) {
         setError(data.errors[0].msg);
       } else {
@@ -36,7 +36,7 @@ function SignUp() {
         setName("");
         setEmail("");
         setPassword("");
-        console.log("sucessful signup");
+     //   console.log("sucessful signup");
         setError(null);
         setInfo("You are Signed up sucesfully.Please Sign in");
       }
@@ -56,7 +56,7 @@ function SignUp() {
     <>
       <div className="form-control">
         <div>
-          <label htmlFor="nameInput">Name</label>
+          <label htmlFor="nameInput" className="form-heading">Name</label>
           <br />
           <input
             type="text"
@@ -67,7 +67,7 @@ function SignUp() {
           />
         </div>
         <div>
-          <label htmlFor="emailInput">Email</label>
+          <label htmlFor="emailInput" className="form-heading">Email</label>
           <br />
           <input
             type="text"
@@ -78,7 +78,7 @@ function SignUp() {
           />
         </div>
         <div>
-          <label htmlFor="passwordInput">Password</label>
+          <label htmlFor="passwordInput" className="form-heading">Password</label>
           <br />
           <input
             type="password"

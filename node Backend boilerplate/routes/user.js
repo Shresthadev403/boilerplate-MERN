@@ -2,7 +2,7 @@ const {Router}=require('express');
 const { isAdmin } = require('../controllers/admin');
 const { requireSignIn, forgetPassword, resetPassword, hasAuthorization } = require('../controllers/auth');
 const { userById, getUser, userUpdate, deleteUser, getAllUsers } = require('../controllers/user');
-const { passwordResetValidator, forgetPasswordValidator, passwordValidator, emailValidator } = require('../validator/validator');
+const {  passwordValidator, emailValidator } = require('../validator/validator');
 
 
 router=Router();

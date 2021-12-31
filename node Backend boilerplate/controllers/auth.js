@@ -30,7 +30,7 @@ exports.socialLogin = (req, res) => {
       user.save();
       // generate a token with user id and secret
       const token = jwt.sign(
-        { _id: user._id, iss: "NODEAPI" },
+        { _id: user._id,role:user.role, iss: "NODEAPI" },
         process.env.JWT_SECRET
       );
       res.cookie("t", token, { expire: new Date() + 2.628e6 });

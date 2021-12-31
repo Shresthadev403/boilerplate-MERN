@@ -1,11 +1,22 @@
 const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 const crypto = require("crypto");
+const { trim } = require("lodash");
 //define a user model with different properties
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    trim: true,
+  },
+  location: {
+    type: String,
+    default: "set your location from edit profile",
+    trim: true,
+  },
+  aboutme: {
+    type: String,
+    default: "write your details form edit profile",
     trim: true,
   },
   email: {
@@ -34,7 +45,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
   },
   resetPasswordLink: {
-    type:String,
+    type: String,
     data: String,
     default: "",
   },

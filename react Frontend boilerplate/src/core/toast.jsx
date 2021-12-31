@@ -5,10 +5,10 @@ toast.configure();
 
 export const errNotification = (data) => {
   toast.error(data, { autoClose: 10000 });
-  console.log("notification");
+//  console.log("notification");
 };
 
 export const infoNotification = (data) => {
   toast.success(data, { autoClose: 10000 });
-  console.log("notification");
+//  console.log("notification");
 };

@@ -9,7 +9,7 @@ function User() {
   const [users, setUsers] = useState(null);
   useEffect(() => {
     getUsers().then((data) => {
-      console.log("all users:", data);
+     // console.log("all users:", data);
       setUsers(data.data.users);
     });
   }, []);

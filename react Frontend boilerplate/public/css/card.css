@@ -36,7 +36,6 @@
   padding: 16px;
   text-align: left;
   background-color: #f1f1f1;
-  
 }
 
 .card-item {
@@ -45,4 +44,70 @@
   align-items: left;
   justify-content: space-between;
   font-size: 1.5vw;
+}
+
+@media screen and (max-width: 932px) {
+  .card-item {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    font-size: 15px;
+  }
+}
+
+.mySlides {
+  width: 360px;
+  height: 200px;
+  display: none;
+  float: right;
+}
+@media screen and (max-width: 932px) {
+  .mySlides {
+    float: left;
+    width: 360px;
+    height: 200px;
+    display: none;
+  }
+  .myinfo {
+    font-family: cursive;
+    margin: 0;
+    width: 250px;
+    height: auto;
+
+    float: left;
+    font-size: medium;
+  }
+}
+
+.article {
+  float: left;
+  font-family: cursive;
+  text-align: justify;
+}
+
+.article h2 {
+  color: rgb(189, 28, 103);
+  font-family: cursive;
+}
+
+.article ul li a {
+  color: rgb(14, 66, 30);
+  font-family: cursive;
+  margin-left: 30px;
+}
+
+.myinfo {
+  font-family: cursive;
+  width: auto;
+  height: 200px;
+
+  float: left;
+  font-size: large;
+}
+
+#footer {
+  background-color: black;
+  color: white;
+  text-align: center;
 }

@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const formidable = require("formidable");
-const fs = require("fs");
+
 const _ = require("lodash");
 
 exports.userById = (req, res, next, id) => {
@@ -32,12 +32,16 @@ exports.userUpdate = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
   //console.log(form);
-  console.log(req.body);
+  //console.log(req.body);
   form.parse(req, (err, fields) => {
     // console.log("creating new post");
-   // console.log(req.body);
+    //console.log(fields,"mmmmmmmmm");
     if (err) {
       return res.status(400).json({ error: err });
+    }
+    if(Object.keys(fields).length === 0){
+      console.log("empty");
+      return res.status(400).json({ error:"Field cannot be empty"});
     }
     let user = req.profile;
     user = _.extend(user, fields);

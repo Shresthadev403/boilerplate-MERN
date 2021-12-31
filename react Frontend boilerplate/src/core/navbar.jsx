@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <div>
       <nav className="navbar">
-        <div className="logo">Navbar</div>
+        <div className="logo" ><a href="/">MERN</a></div>
         <ul className="nav-links">
           <input type="checkbox" id="checkbox_toggle" />
           <label htmlFor="checkbox_toggle" className="hamburger">

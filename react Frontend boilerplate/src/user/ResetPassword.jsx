@@ -37,7 +37,7 @@ function ResetPassword() {
         // crear state after submitting form
         // setEmail("");
         // setPassword("");
-        console.log("new password set sucessful");
+      //  console.log("new password set sucessful");
         setError(null);
         setInfo(data.data.msg);
         // setJwt(data.data,()=>{
@@ -58,17 +58,13 @@ function ResetPassword() {
     }
   }, [error, info]);
 
-//   if(redirectToHome)
-//   {
-    
-//     return <Navigate to="/"/>
-//   }
+
 
   return (
     <>
       <div className="form-control">
         <div>
-          <label htmlFor="passwordInput">New Password</label>
+          <label htmlFor="passwordInput" className="form-heading">New Password</label>
           <br />
           <input
             type="password"

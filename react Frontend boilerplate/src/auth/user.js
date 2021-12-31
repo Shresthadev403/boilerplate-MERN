@@ -19,25 +19,25 @@ export const getProfile = (userId) => {
     });
 };
 
-export const updateUser = async(userdata, userId) => {
+export const updateUser = async (userdata, userId) => {
   let formData = new FormData();
-  if (userdata.name) {
-   await formData.append("name", userdata.name);
-    console.log(formData);
-  }
-  if(userdata.email)
-  {
-    formData.append("email",userdata.email);
-    console.log("email");
-  }
+  // if (userdata.name) {
+  //  await formData.append("name", userdata.name);
+  //   console.log(formData);
+  // }
+  // if(userdata.email)
+  // {
+  //   formData.append("email",userdata.email);
+  //   console.log("email");
+  // }
 
-  if(userdata.password){
-    formData.append("email",userdata.password);
-  }
- // console.log(userdata);
- // console.log(formData);
+  // if(userdata.password){
+  //   formData.append("email",userdata.password);
+  // }
+  // console.log(userdata);
+  // console.log(formData);
   return axios
-    .put(`${process.env.REACT_APP_API_URI}/user/update/${userId}`, formData, {
+    .put(`${process.env.REACT_APP_API_URI}/user/update/${userId}`, userdata, {
       headers: {
         //  "Content-Type": "application/json",
         "Content-Type": "multipart/form-data",
@@ -45,17 +45,17 @@ export const updateUser = async(userdata, userId) => {
       },
     })
     .then(function (response) {
-      console.log(response);
+      //  console.log(response);
       return response;
     })
     .catch(function (error) {
-      console.log(error);
+      //  console.log(error);
       return error.response;
     });
 };
 
 export const deleteUser = (userId) => {
-  console.log("userdelete");
+  //  console.log("userdelete");
   return axios
     .delete(`${process.env.REACT_APP_API_URI}/user/delete/${userId}`, {
       headers: {
@@ -77,8 +77,8 @@ export const deleteUser = (userId) => {
 };
 
 export const forgetPassword = (user) => {
-  console.log("forgot password");
-  console.log(user);
+  //  console.log("forgot password");
+  // console.log(user);
   return axios
     .put(`${process.env.REACT_APP_API_URI}/forgetpassword`, user, {
       headers: {
@@ -86,8 +86,7 @@ export const forgetPassword = (user) => {
       },
     })
     .then(function (response) {
-      console.log(response);
-
+      //  console.log(response);
       return response;
     })
     .catch(function (error) {
@@ -97,8 +96,8 @@ export const forgetPassword = (user) => {
 };
 
 export const resetPassword = (user) => {
-  console.log("reset password");
-  console.log(user);
+  // console.log("reset password");
+  // console.log(user);
   return axios
     .put(`${process.env.REACT_APP_API_URI}/resetpassword`, user, {
       headers: {
@@ -106,8 +105,7 @@ export const resetPassword = (user) => {
       },
     })
     .then(function (response) {
-      console.log(response);
-
+      //  console.log(response);
       return response;
     })
     .catch(function (error) {

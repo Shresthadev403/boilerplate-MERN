@@ -8,6 +8,8 @@ import { infoNotification } from "../core/toast";
 function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const[location,setLocation]=useState("");
+  const[aboutme,setAboutme]=useState("");
   const {userId}=useParams();
 
   const navigate=useNavigate();
@@ -17,6 +19,7 @@ function Profile() {
 
       if(data && getJwt().user.role==='admin'){
         infoNotification(data.data.msg);
+        navigate('/users');
       }else{
         infoNotification("your account has been deleted sucessfully");
         signOut();
@@ -35,19 +38,23 @@ function Profile() {
       //  console.log("myprofile:",data);
       setName(data.data.name);
       setEmail(data.data.email);
+      setLocation(data.data.location);
+      setAboutme(data.data.aboutme);
     });
-  }, []);
+  }, [userId]);
 
   return (
     <>
       <div className="card">
         <h2 className="card-item">Name:{name}</h2>
         <h1 className="card-item">Email:{email}</h1>
+        <h1 className="card-item">Location:{location}</h1>
+        <h1 className="card-item">About me:{aboutme}</h1>
       </div>
      {(getJwt().user.role==='admin'|| getJwt().user._id===userId)&&( <div className="form-control">
         <div>
         <button type="submit" className="button-submit"onClick={navigateToUserEditProfilePage} >
-        <b>Update</b>
+        <b>Edit Profile</b>
       </button>
       <button type="submit" className="button-submit" onClick={deleteButton}>
         <b>Delete</b>

@@ -17,9 +17,9 @@ exports.signUpValidator = [
     .isEmpty()
     .isLength({ min: 8, max: 32 })
     .withMessage("password must be 8 character long")
-    .matches("[1 - 9]")
+    .matches(/\d/)
     .withMessage("password must have atleast one numeric character")
-    .matches("[A - Z]")
+    .matches(/.*[A-Z].*/)
     .withMessage("password must have atleast one upper case letter"),
   (req, res, next) => {
     const errors = validationResult(req).array();
@@ -46,7 +46,11 @@ exports.signInValidator = [
     .not()
     .isEmpty()
     .isLength({ min: 5 })
-    .withMessage("password must be 8 character long"),
+    .withMessage("password must be 8 character long")
+    .matches(/\d/)
+    .withMessage("password must have atleast one numeric character")
+    .matches(/.*[A-Z].*/)
+    .withMessage("password must have atleast one upper case letter"),
   (req, res, next) => {
     const errors = validationResult(req).array();
     if (errors.length) {

@@ -3,6 +3,7 @@ import { useEffect } from "react/cjs/react.development";
 import { Navigate, Link } from "react-router-dom";
 import { setJwt, signIn } from "../auth/auth";
 import { errNotification, infoNotification } from "../core/toast";
+import SocialLogin from "./socialLogin";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ function SignIn() {
     //  console.log(user);
     //  console.log("submit");
     signIn(user).then((data) => {
-      console.log("signin data:", data);
+    //  console.log("signin data:", data);
       if (data.errors) {
         setError(data.errors[0].msg);
       } else if (data.error) {
@@ -36,7 +37,7 @@ function SignIn() {
         // crear state after submitting form
         // setEmail("");
         // setPassword("");
-        console.log("sucessful signin");
+       // console.log("sucessful signin");
         // setError(null);
         setInfo("Sign in Sucessful");
         setJwt(data.data, () => {
@@ -62,7 +63,7 @@ function SignIn() {
     <>
       <div className="form-control">
         <div>
-          <label htmlFor="emailInput">Email</label>
+          <label htmlFor="emailInput" className="form-heading">Email</label>
           <br />
           <input
             type="text"
@@ -73,7 +74,7 @@ function SignIn() {
           />
         </div>
         <div>
-          <label htmlFor="passwordInput">Password</label>
+          <label htmlFor="passwordInput" className="form-heading">Password</label>
           <br />
           <input
             type="password"
@@ -92,9 +93,11 @@ function SignIn() {
             <b>SignIn</b>
           </button>
         </div>
-
+        <div style={{border:" solid blue" ,minWidth:"200px",}}>
+          <SocialLogin />
+        </div>
         <div>
-          <Link to="/forgetpassword" >
+          <Link to="/forgetpassword">
             <b>forget passowrd?</b>
           </Link>
         </div>

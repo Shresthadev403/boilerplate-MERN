@@ -15,9 +15,9 @@ export const getJwt = () => {
   }
 };
 export const updatejwt = (updatedData) => {
-  console.log(updatedData);
-  let signedInUser =JSON.parse( localStorage.getItem("data"));
-  console.log(signedInUser);
+//  console.log(updatedData);
+  let signedInUser = JSON.parse(localStorage.getItem("data"));
+ // console.log(signedInUser);
   if (updatedData._id == signedInUser.user._id) {
     signedInUser.user.name = updatedData.name;
     signedInUser.user.email = updatedData.email;
@@ -29,7 +29,7 @@ export const signUp = (user) => {
   return axios
     .post(`${process.env.REACT_APP_API_URI}/signup`, user)
     .then(function (response) {
-      console.log("response:", response);
+    //  console.log("response:", response);
       return response;
     })
     .catch(function (error) {
@@ -43,7 +43,20 @@ export const signIn = (user) => {
   return axios
     .post(`${process.env.REACT_APP_API_URI}/signin`, user)
     .then(function (response) {
-      console.log("response:", response);
+   //   console.log("response:", response);
+      return response;
+    })
+    .catch(function (error) {
+      //  console.log("error:",error.response.data.errors[0]);
+      return error.response.data;
+    });
+};
+
+export const googleLogin = (user) => {
+  return axios
+    .post(`${process.env.REACT_APP_API_URI}/sociallogin`, user)
+    .then(function (response) {
+    //  console.log("response:", response);
       return response;
     })
     .catch(function (error) {
@@ -54,7 +67,7 @@ export const signIn = (user) => {
 
 export const signOut = () => {
   // axios.defaults.headers.common = {'Authorization': `bearer ${getJwt().token}`}
-  console.log("signout");
+ // console.log("signout");
 
   return axios
     .get(`${process.env.REACT_APP_API_URI}/signout`, {
@@ -63,7 +76,7 @@ export const signOut = () => {
       },
     })
     .then(function (response) {
-      console.log(response);
+    //  console.log(response);
       // clear token from local storage
       if (typeof window !== "undefined") {
         localStorage.removeItem("data");
@@ -71,9 +84,7 @@ export const signOut = () => {
       return response;
     })
     .catch(function (error) {
-      console.log(error);
+    //  console.log(error);
       return error.response;
     });
 };
-
-

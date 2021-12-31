@@ -17,7 +17,7 @@ export const getUsers = () => {
       },
     })
     .then(function (response) {
-      console.log(response);
+  //    console.log(response);
       return response;
     })
     .catch(function (error) {
