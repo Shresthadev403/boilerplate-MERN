@@ -37,7 +37,7 @@ A simple boiler plate which includes authentication and user controls.
   5) Ready to use in any MERN Stack application.
 
 
-## Use this proect:
+## Use this project:
 
  1) Clone the git repository.
  2) Run **npm install** to install dependencies.
