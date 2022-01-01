@@ -27,8 +27,13 @@ function ResetPassword() {
       console.log("reset data:", data);
       if (data.errors) {
         setError(data.data.errors[0].msg);
+        setError(null);
       } else if(data.data.error){
         setError(data.data.error);
+        setError(null);
+      }else if(data.data.errors){
+        setError(data.data.errors[0].msg);
+        setError(null);
       }
       else {
         // crear state after submitting form
