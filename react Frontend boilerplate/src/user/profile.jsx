@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useState,useEffect } from "react";
 import { deleteUser, getProfile } from "../auth/user";
 import {useNavigate,useParams}from 'react-router-dom';
 import { getJwt, signOut } from "../auth/auth";
@@ -21,11 +20,13 @@ function Profile() {
         infoNotification(data.data.msg);
         navigate('/users');
       }else{
-        infoNotification("your account has been deleted sucessfully");
-        signOut();
-        navigate('/');
-       setTimeout( window.location.reload(), 25000 )
-        
+       
+        signOut().then((data) => {
+          // console.log("signed out:",data);
+          infoNotification("your account has been deleted sucessfully");
+          navigate('/')
+          setTimeout( window.location.reload(), 25000 );
+        });
       }
 
     });

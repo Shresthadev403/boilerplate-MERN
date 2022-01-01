@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState,useEffect } from "react";
 import { useParams ,Link} from "react-router-dom";
-import { setJwt, signIn } from "../auth/auth";
 import { errNotification,infoNotification } from "../core/toast";
 import { resetPassword } from "../auth/user";
 
@@ -9,7 +7,6 @@ function ResetPassword() {
   const [newpassword, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [info, setInfo] = useState(null);
-  const[redirectToHome,setRedirectToHome]=useState(false);
   const{resetToken}=useParams();
   // handle changes on input field
   const handleInputChange = (data) => (event) => {

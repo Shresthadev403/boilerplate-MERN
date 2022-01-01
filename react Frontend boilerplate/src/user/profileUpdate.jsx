@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import { useEffect } from "react/cjs/react.development";
-import { getJwt, signUp, updatejwt } from "../auth/auth";
+import { useEffect } from "react";
+import { getJwt,  updatejwt } from "../auth/auth";
 import { updateUser } from "../auth/user";
 import { infoNotification, errNotification } from "../core/toast";
 import { useParams, useNavigate } from "react-router-dom";
@@ -29,8 +29,8 @@ function UpdateProfile() {
     const formData = new FormData(form.current);
 
     // Delete the key/value pairs
-    for (var pair of formData.entries()) {
-      if (pair[1].length === 0) formData.delete(pair[0]);
+    for (var pairs of formData.entries()) {
+      if (pairs[1].length === 0) formData.delete(pairs[0]);
       //    console.log(pair[0] + ", " + pair[1]);
     }
 

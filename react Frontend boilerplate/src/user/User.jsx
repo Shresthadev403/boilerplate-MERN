@@ -1,11 +1,9 @@
 import { Link} from "react-router-dom";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { getUsers } from "../auth/admin";
-import { getProfile } from "../auth/user";
+
 
 function User() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [users, setUsers] = useState(null);
   useEffect(() => {
     getUsers().then((data) => {

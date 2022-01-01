@@ -3,7 +3,7 @@ import reactImg from "../images/react.jpg";
 import expressImg from "../images/express.jpg";
 import nodeImg from "../images/node.jpg";
 import mernWorkImg from "../images/mernworkimg.jpg";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import { useEffect } from "react";
 import { carousel } from "../script";
 
@@ -38,6 +38,7 @@ function Home() {
           <a
             href="https://github.com/Shresthadev403/boilerplate-MERN"
             target="_blank"
+            rel="noreferrer"
           >
             Boilerplate MERN/GITHUB
           </a>
@@ -151,6 +152,7 @@ function Home() {
               <a
                 href="https://www.mongodb.com/languages/mern-stack-tutorial"
                 target="_blank"
+                rel="noreferrer"
               >
                 MERN STACK TUTORIAL
               </a>
@@ -159,6 +161,7 @@ function Home() {
               <a
                 href="https://www.mongodb.com/languages/mern-stack-tutorial"
                 target="_blank"
+                rel="noreferrer"
               >
                 MERN STACK UDEMY COURSE
               </a>
@@ -167,6 +170,7 @@ function Home() {
               <a
                 href="https://www.mongodb.com/languages/mern-stack-tutorial"
                 target="_blank"
+                rel="noreferrer"
               >
                 MERN STACK(Oak Academy)
               </a>

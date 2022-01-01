@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
-import { Navigate } from "react-router-dom";
-import { setJwt, signIn } from "../auth/auth";
 import { errNotification, infoNotification } from "../core/toast";
 import { forgetPassword } from "../auth/user";
 

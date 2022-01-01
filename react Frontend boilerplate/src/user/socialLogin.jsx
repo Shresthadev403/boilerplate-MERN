@@ -42,7 +42,7 @@ function SocialLogin() {
   return (
     <div>
       <GoogleLogin
-        clientId="26002781582-t2rr5qik3ht1qv6kmsa35dm081a6nn7o.apps.googleusercontent.com"
+        clientId="26002781582-pgmcrtcvfjrf6jkkkcqds619vh5khjgk.apps.googleusercontent.com"
         buttonText="Login with Google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
