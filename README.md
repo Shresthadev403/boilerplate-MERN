@@ -3,6 +3,11 @@ A simple boiler plate which includes authentication and user controls.
 
 ## This project is hosted on website link:https://mern-boilerplate-by-shresthadev403.netlify.app
 
+## Sign in with the following details to gain Admin controls
+   ###  Email:admin@gmail.com 
+   ###  Password:A1234567
+   
+
 
 
 ## Details of this project:
